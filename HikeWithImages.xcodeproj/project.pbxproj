@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9FA3113F293B443300B77DFB /* LocationImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA3113E293B443300B77DFB /* LocationImageTableViewCell.swift */; };
-		9FA31143293B468200B77DFB /* ImageLocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA31142293B468200B77DFB /* ImageLocationViewModel.swift */; };
+		9FA3113F293B443300B77DFB /* ImageLocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA3113E293B443300B77DFB /* ImageLocationTableViewCell.swift */; };
+		9FA31143293B468200B77DFB /* ImagesLocationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA31142293B468200B77DFB /* ImagesLocationsViewModel.swift */; };
 		9FA31145293B46BC00B77DFB /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA31144293B46BC00B77DFB /* Image.swift */; };
 		9FA31147293B471A00B77DFB /* ImageDataCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA31146293B471A00B77DFB /* ImageDataCache.swift */; };
 		9FA3114D293B47AC00B77DFB /* ImageDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA3114C293B47AC00B77DFB /* ImageDataFetcher.swift */; };
@@ -17,12 +17,13 @@
 		9FA31158293B62A300B77DFB /* FlickrImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA31157293B62A300B77DFB /* FlickrImage.swift */; };
 		9FBCC69E293B422000188856 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBCC69D293B422000188856 /* AppDelegate.swift */; };
 		9FBCC6A0293B422000188856 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBCC69F293B422000188856 /* SceneDelegate.swift */; };
-		9FBCC6A2293B422000188856 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBCC6A1293B422000188856 /* MainViewController.swift */; };
+		9FBCC6A2293B422000188856 /* ImagesLocationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBCC6A1293B422000188856 /* ImagesLocationsViewController.swift */; };
 		9FBCC6A7293B422200188856 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9FBCC6A6293B422200188856 /* Assets.xcassets */; };
 		9FBCC6AA293B422200188856 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9FBCC6A8293B422200188856 /* LaunchScreen.storyboard */; };
 		9FBCC6B5293B422200188856 /* HikeWithImagesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBCC6B4293B422200188856 /* HikeWithImagesTests.swift */; };
 		9FBCC6BF293B422200188856 /* HikeWithImagesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBCC6BE293B422200188856 /* HikeWithImagesUITests.swift */; };
 		9FBCC6C1293B422200188856 /* HikeWithImagesUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBCC6C0293B422200188856 /* HikeWithImagesUITestsLaunchTests.swift */; };
+		9FEF29A3293D360700FF5872 /* DebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FEF29A2293D360700FF5872 /* DebugViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,8 +44,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		9FA3113E293B443300B77DFB /* LocationImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationImageTableViewCell.swift; sourceTree = "<group>"; };
-		9FA31142293B468200B77DFB /* ImageLocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLocationViewModel.swift; sourceTree = "<group>"; };
+		9FA3113E293B443300B77DFB /* ImageLocationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLocationTableViewCell.swift; sourceTree = "<group>"; };
+		9FA31142293B468200B77DFB /* ImagesLocationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesLocationsViewModel.swift; sourceTree = "<group>"; };
 		9FA31144293B46BC00B77DFB /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		9FA31146293B471A00B77DFB /* ImageDataCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDataCache.swift; sourceTree = "<group>"; };
 		9FA3114C293B47AC00B77DFB /* ImageDataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDataFetcher.swift; sourceTree = "<group>"; };
@@ -54,7 +55,7 @@
 		9FBCC69A293B422000188856 /* HikeWithImages.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HikeWithImages.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FBCC69D293B422000188856 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9FBCC69F293B422000188856 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		9FBCC6A1293B422000188856 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		9FBCC6A1293B422000188856 /* ImagesLocationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesLocationsViewController.swift; sourceTree = "<group>"; };
 		9FBCC6A6293B422200188856 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9FBCC6A9293B422200188856 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9FBCC6AB293B422200188856 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -63,6 +64,7 @@
 		9FBCC6BA293B422200188856 /* HikeWithImagesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HikeWithImagesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FBCC6BE293B422200188856 /* HikeWithImagesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HikeWithImagesUITests.swift; sourceTree = "<group>"; };
 		9FBCC6C0293B422200188856 /* HikeWithImagesUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HikeWithImagesUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		9FEF29A2293D360700FF5872 /* DebugViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,8 +95,9 @@
 		9FA31148293B472000B77DFB /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				9FA3113E293B443300B77DFB /* LocationImageTableViewCell.swift */,
-				9FBCC6A1293B422000188856 /* MainViewController.swift */,
+				9FA3113E293B443300B77DFB /* ImageLocationTableViewCell.swift */,
+				9FBCC6A1293B422000188856 /* ImagesLocationsViewController.swift */,
+				9FEF29A2293D360700FF5872 /* DebugViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -102,7 +105,7 @@
 		9FA31149293B472500B77DFB /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				9FA31142293B468200B77DFB /* ImageLocationViewModel.swift */,
+				9FA31142293B468200B77DFB /* ImagesLocationsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -311,12 +314,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				9FA31158293B62A300B77DFB /* FlickrImage.swift in Sources */,
-				9FA31143293B468200B77DFB /* ImageLocationViewModel.swift in Sources */,
+				9FA31143293B468200B77DFB /* ImagesLocationsViewModel.swift in Sources */,
 				9FA31147293B471A00B77DFB /* ImageDataCache.swift in Sources */,
 				9FA31151293B48F200B77DFB /* Location.swift in Sources */,
 				9FA31145293B46BC00B77DFB /* Image.swift in Sources */,
-				9FA3113F293B443300B77DFB /* LocationImageTableViewCell.swift in Sources */,
-				9FBCC6A2293B422000188856 /* MainViewController.swift in Sources */,
+				9FA3113F293B443300B77DFB /* ImageLocationTableViewCell.swift in Sources */,
+				9FEF29A3293D360700FF5872 /* DebugViewController.swift in Sources */,
+				9FBCC6A2293B422000188856 /* ImagesLocationsViewController.swift in Sources */,
 				9FBCC69E293B422000188856 /* AppDelegate.swift in Sources */,
 				9FBCC6A0293B422000188856 /* SceneDelegate.swift in Sources */,
 				9FA3114F293B48B400B77DFB /* LocationProvider.swift in Sources */,
@@ -489,8 +493,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = E6KB8WYCTF;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HikeWithImages/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "The app finds images based on your location";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "The app finds images based on your location";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
@@ -515,8 +522,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = E6KB8WYCTF;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HikeWithImages/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "The app finds images based on your location";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "The app finds images based on your location";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";

@@ -7,11 +7,12 @@
 
 import UIKit
 
-class LocationImageTableViewCell: UITableViewCell {
-  static let identifier = "LocationImageTableViewCell"
+class ImageLocationTableViewCell: UITableViewCell {
+  static let identifier = "ImageLocationTableViewCell"
   
   private lazy var locationImage: UIImageView = {
     let image = UIImageView()
+    image.contentMode = .scaleToFill
     return image
   }()
   
@@ -41,13 +42,14 @@ class LocationImageTableViewCell: UITableViewCell {
   }
 }
 
-private extension LocationImageTableViewCell {
+private extension ImageLocationTableViewCell {
   func populate() {
     guard let imageData = image?.imageData else { return }
     locationImage.image = UIImage(data: imageData)
   }
   
   func setupView() {
+    backgroundColor = .clear
     contentView.addSubview(locationImage)
     locationImage.translatesAutoresizingMaskIntoConstraints = false
     locationImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5).isActive = true

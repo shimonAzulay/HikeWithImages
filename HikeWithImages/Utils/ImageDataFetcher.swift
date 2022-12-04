@@ -33,12 +33,10 @@ class FlickerImageDataFetcher: ImageDataFetcher {
       throw ImageDataFetcherError.badLocationUrl
     }
  
-    print(url)
     let (data, _) = try await URLSession.shared.data(from: url)
     let decoder = JSONDecoder()
     let flickerResponse = try decoder.decode(FlickerResponse.self, from: data)
     
-    print(flickerResponse)
     guard let image = flickerResponse.photos.photo.first else {
       throw ImageDataFetcherError.badResponse
     }

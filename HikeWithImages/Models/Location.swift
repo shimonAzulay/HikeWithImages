@@ -7,9 +7,7 @@
 
 import Foundation
 
-struct Location {
+struct Location: Hashable, Encodable {
   let latitude: Double
   let longitude: Double
 }
-
-extension Location: Hashable {}
