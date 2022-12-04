@@ -35,7 +35,7 @@ class ImagesLocationsViewModel: ObservableObject {
     self.locationProvider = locationProvider
   }
   
-  func toggle() {
+  func toggleStartStop() {
     switch state {
     case .started, .image:
       stop()

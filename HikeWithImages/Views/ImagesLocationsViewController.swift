@@ -28,7 +28,7 @@ class ImagesLocationsViewController: UIViewController {
   }()
   
   private lazy var startStopHikeButton: UIBarButtonItem = {
-    let barButtonItem = UIBarButtonItem(title: "Start", style: .plain, target: self, action: #selector(toggleStartTapped))
+    let barButtonItem = UIBarButtonItem(title: "Start", style: .plain, target: self, action: #selector(startStopHikeTapped))
     return barButtonItem
   }()
   
@@ -80,8 +80,8 @@ class ImagesLocationsViewController: UIViewController {
     setupLabel()
   }
   
-  @objc func toggleStartTapped() {
-    viewModel.toggle()
+  @objc func startStopHikeTapped() {
+    viewModel.toggleStartStop()
   }
   
   @objc func debugTapped() {
@@ -130,7 +130,7 @@ extension ImagesLocationsViewController: UITableViewDataSource {
     let image = images[indexPath.row]
     var locationImageCell = ImageLocationTableViewCell()
     if let reusedLocationImageCellCell = tableView.dequeueReusableCell(withIdentifier: ImageLocationTableViewCell.identifier,
-                                                             for: indexPath) as? ImageLocationTableViewCell {
+                                                                       for: indexPath) as? ImageLocationTableViewCell {
       locationImageCell = reusedLocationImageCellCell
     }
 
