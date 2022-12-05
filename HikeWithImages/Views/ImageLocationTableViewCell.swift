@@ -20,7 +20,7 @@ class ImageLocationTableViewCell: UITableViewCell {
   private var imageFetcherCancellable: AnyCancellable?
   private var imageLocationViewModel: ImageLocationViewModel?
   
-  func updateCell(viewModel: ImageLocationViewModel) {
+  func updateCell(withViewModel viewModel: ImageLocationViewModel) {
     imageLocationViewModel = viewModel
     imageFetcherCancellable = imageLocationViewModel?.$imageData
       .sink { [weak self] imageData in
@@ -46,6 +46,7 @@ class ImageLocationTableViewCell: UITableViewCell {
     locationImage.image = nil
     imageFetcherCancellable?.cancel()
     imageFetcherCancellable = nil
+    imageLocationViewModel = nil
   }
 }
 

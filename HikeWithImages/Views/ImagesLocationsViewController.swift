@@ -142,7 +142,7 @@ extension ImagesLocationsViewController: UITableViewDataSource {
       locationImageCell = reusedLocationImageCellCell
     }
     
-    locationImageCell.updateCell(viewModel: ImageLocationViewModel(imageFetcher: viewModel.imageFetcher,
+    locationImageCell.updateCell(withViewModel: ImageLocationViewModel(imageFetcher: viewModel.imageFetcher,
                                                                    imageDataCache: viewModel.imageDataCache,
                                                                    imageUrl: imageUrl))
     return locationImageCell
