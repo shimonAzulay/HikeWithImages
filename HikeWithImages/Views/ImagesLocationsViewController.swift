@@ -143,8 +143,8 @@ extension ImagesLocationsViewController: UITableViewDataSource {
     }
     
     locationImageCell.updateCell(withViewModel: ImageLocationViewModel(imageFetcher: viewModel.imageFetcher,
-                                                                   imageDataCache: viewModel.imageDataCache,
-                                                                   imageUrl: imageUrl))
+                                                                       imageDataCache: viewModel.imageDataCache,
+                                                                       imageUrl: imageUrl))
     return locationImageCell
   }
 }
@@ -172,7 +172,7 @@ private extension ImagesLocationsViewModel.State {
       case .locationError:
         return "Failed to get a location"
       case .imageFetchError:
-        return "Failed to fetch an image by location"
+        return "Failed to fetch an image based on location"
       }
     }
   }

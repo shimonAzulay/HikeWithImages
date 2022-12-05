@@ -8,6 +8,7 @@
 import Foundation
 
 class ImageDataCache {
+  // Thread safe
   private let cache = NSCache<NSString, NSData>()
   
   func getItem(forKey key: String) -> Data? {

@@ -73,6 +73,8 @@ private extension ImagesLocationsViewModel {
   
   func stop() {
     locationProvider.stop()
+    locationCancellable?.cancel()
+    locationCancellable = nil
   }
   
   func handleLocationProviderStatus(_ status: LocationProviderStatus) {
@@ -81,7 +83,6 @@ private extension ImagesLocationsViewModel {
     case .noPermission:
       state = .noPermission
     case .failedToFetchLocation(let error):
-      print("Location error: \(error.localizedDescription)")
       state = .failed(.locationError(error))
     case .location(let location):
       fetchImage(atLocation: location)

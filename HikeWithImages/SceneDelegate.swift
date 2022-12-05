@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     window = UIWindow(windowScene: windowScene)
     
-    let viewModel = ImagesLocationsViewModel(imageFetcher: FlickerImageFetcher(),
+    let viewModel = ImagesLocationsViewModel(imageFetcher: FlickrImageFetcher(),
                                              locationProvider: AppLocationProvider())
     let mainViewController = ImagesLocationsViewController(viewModel: viewModel)
     
