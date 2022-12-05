@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  LocationProvider.swift
 //  HikeWithImages
 //
 //  Created by Shimon Azulay on 03/12/2022.
@@ -10,6 +10,7 @@ import Combine
 import CoreLocation
 
 enum LocationProviderStatus {
+  case permissionGranted
   case location(Location)
   case noPermission
   case failedToFetchLocation(Error)
@@ -17,7 +18,8 @@ enum LocationProviderStatus {
 
 protocol LocationProvider {
   var publisher: AnyPublisher<LocationProviderStatus, Never> { get }
-  var distanceFilter: Int? { get set }
+  var distanceFilter: Int { get set }
+  var accuracy: Int { get set }
   var locations: [Location] { get }
   func start()
   func stop()
@@ -31,9 +33,9 @@ class AppLocationProvider: NSObject, LocationProvider {
     locationSubject.eraseToAnyPublisher()
   }
   
-  var distanceFilter: Int? = 100 {
+  var distanceFilter: Int = 100 {
     didSet {
-      guard let distanceFilter = distanceFilter else {
+      guard distanceFilter > 0 else {
         locationManager.distanceFilter = kCLDistanceFilterNone
         return
       }
@@ -43,11 +45,19 @@ class AppLocationProvider: NSObject, LocationProvider {
     }
   }
   
+  var accuracy: Int = 16 {
+    didSet {
+      print("Accuracy changed to: \(accuracy)")
+    }
+  }
+  
   private(set) var locations = [Location]()
   
   override init() {
     super.init()
     locationManager.desiredAccuracy = kCLLocationAccuracyBest
+    locationManager.pausesLocationUpdatesAutomatically = false
+    locationManager.activityType = .otherNavigation
     locationManager.allowsBackgroundLocationUpdates = true
     locationManager.showsBackgroundLocationIndicator = true
     locationManager.distanceFilter = 100
@@ -102,10 +112,11 @@ extension AppLocationProvider: CLLocationManagerDelegate {
     
     guard manager.isPermissionNotDetermined == false else { return }
     
-    locationManager.startUpdatingLocation()
+    locationSubject.send(.permissionGranted)
   }
   
   func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+    print("Failed to fetch location: \(error)")
     locationSubject.send(.failedToFetchLocation(error))
   }
   
@@ -114,11 +125,16 @@ extension AppLocationProvider: CLLocationManagerDelegate {
       return
     }
     
-    let location = Location(latitude: lastLocation.coordinate.latitude,
-                            longitude: lastLocation.coordinate.longitude)
+    guard lastLocation.horizontalAccuracy < Double(accuracy) else {
+      print("Received location with an accuracy: \(lastLocation.horizontalAccuracy)")
+      return
+    }
     
+    let location = Location(latitude: lastLocation.coordinate.latitude,
+                            longitude: lastLocation.coordinate.longitude,
+                            accuracy: lastLocation.horizontalAccuracy)
     print("Received location at: \(location)")
-    self.locations.insert(location, at: 0)
+    self.locations.append(location)
     locationSubject.send(.location(location))
   }
 }

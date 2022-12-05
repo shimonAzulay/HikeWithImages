@@ -10,4 +10,5 @@ import Foundation
 struct Location: Hashable, Encodable {
   let latitude: Double
   let longitude: Double
+  let accuracy: Double
 }

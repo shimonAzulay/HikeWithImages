@@ -19,8 +19,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     window = UIWindow(windowScene: windowScene)
     
-    let viewModel = ImagesLocationsViewModel(imageDataFetcher: FlickerImageDataFetcher(),
-                                           locationProvider: AppLocationProvider())
+    let viewModel = ImagesLocationsViewModel(imageFetcher: FlickerImageFetcher(),
+                                             locationProvider: AppLocationProvider())
     let mainViewController = ImagesLocationsViewController(viewModel: viewModel)
     
     let rootNC = UINavigationController(rootViewController: mainViewController)

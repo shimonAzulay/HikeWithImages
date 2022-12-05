@@ -14,7 +14,7 @@ class ImagesLocationsViewModel: ObservableObject {
   enum State {
     case stopped
     case started
-    case image(Image)
+    case image(URL)
     case noPermission
     case failed(FailureReason)
     
@@ -24,23 +24,36 @@ class ImagesLocationsViewModel: ObservableObject {
     }
   }
   
-  @Published var state: State = .stopped
+  @Published var state: State = .stopped {
+    didSet {
+      switch state {
+      case .stopped:
+        stop()
+      case .started:
+        start()
+      case .image:
+        break
+      case .noPermission, .failed:
+        state = .stopped
+      }
+    }
+  }
   
-  let imageDataFetcher: ImageDataFetcher
+  let imageFetcher: ImageFetcher
   let locationProvider: LocationProvider
   
-  init(imageDataFetcher: ImageDataFetcher,
+  init(imageFetcher: ImageFetcher,
        locationProvider: LocationProvider) {
-    self.imageDataFetcher = imageDataFetcher
+    self.imageFetcher = imageFetcher
     self.locationProvider = locationProvider
   }
   
   func toggleStartStop() {
     switch state {
     case .started, .image:
-      stop()
+      state = .stopped
     case .stopped:
-      start()
+      state = .started
     case .failed, .noPermission:
       break
     }
@@ -49,7 +62,6 @@ class ImagesLocationsViewModel: ObservableObject {
 
 private extension ImagesLocationsViewModel {
   func start() {
-    state = .started
     locationCancellable = locationProvider.publisher
       .sink{ [weak self] in
         self?.handleLocationProviderStatus($0)
@@ -59,27 +71,33 @@ private extension ImagesLocationsViewModel {
   }
   
   func stop() {
-    state = .stopped
     locationProvider.stop()
   }
   
   func handleLocationProviderStatus(_ status: LocationProviderStatus) {
+    print("New status: \(status)")
     switch status {
     case .noPermission:
       state = .noPermission
     case .failedToFetchLocation(let error):
+      print("Location error: \(error.localizedDescription)")
       state = .failed(.locationError(error))
     case .location(let location):
       fetchImage(atLocation: location)
+    case .permissionGranted:
+      if case .started = state {
+        locationProvider.start()
+      }
     }
   }
   
   func fetchImage(atLocation location: Location) {
     Task { @MainActor [weak self] in
       do {
-        let imageData = try await imageDataFetcher.fetchImage(atLocation: location)
-        self?.state = .image(Image(imageData: imageData))
+        let imageUrl = try await imageFetcher.fetchImageUrl(atLocation: location)
+        self?.state = .image(imageUrl)
       } catch {
+        print("Failed to fetch image url by location: \(location) error: \(error)")
         self?.state = .failed(.imageFetchError(error))
       }
     }

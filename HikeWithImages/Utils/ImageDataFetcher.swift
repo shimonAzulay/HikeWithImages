@@ -13,22 +13,20 @@ enum ImageDataFetcherError: Error {
   case badImageUrl
 }
 
-protocol ImageDataFetcher {
-  func fetchImage(atLocation location: Location) async throws -> Data
+protocol ImageFetcher {
+  var cache: ImageDataCache { get }
+  func fetchImageUrl(atLocation location: Location) async throws -> URL
+  func fetchImageData(atUrl url: URL) async throws -> Data
 }
 
-class FlickerImageDataFetcher: ImageDataFetcher {
+class FlickerImageFetcher: ImageFetcher {
   private let key = "2f76ed1b196da7089077878dc2e74b1d"
   private let base = "https://www.flickr.com/"
   private let service = "services/rest/"
   private let method = "method=flickr.photos.search"
-  private let cache = ImageDataCache()
+  let cache = ImageDataCache()
   
-  func fetchImage(atLocation location: Location) async throws -> Data {
-    if let imageData = await cache.getItem(forKey: location) {
-      return imageData
-    }
-    
+  func fetchImageUrl(atLocation location: Location) async throws -> URL {
     guard let url = makeFlickrUrl(withLocation: location) else {
       throw ImageDataFetcherError.badLocationUrl
     }
@@ -45,16 +43,17 @@ class FlickerImageDataFetcher: ImageDataFetcher {
       throw ImageDataFetcherError.badImageUrl
     }
     
-    let imageData = try Data(contentsOf: imageUrl)
-    
-    await cache.setItem(forKey: location, item: imageData)
-    return imageData
+    return imageUrl
+  }
+  
+  func fetchImageData(atUrl url: URL) async throws -> Data {
+    try Data(contentsOf: url)
   }
 }
 
-private extension FlickerImageDataFetcher {
+private extension FlickerImageFetcher {
   func makeFlickrUrl(withLocation location: Location) -> URL? {
-    let urlString = "\(base)\(service)?\(method)&api_key=\(key)&lat=\(location.latitude)&lon=\(location.longitude)&per_page=1&page=1&format=json&nojsoncallback=1"
+    let urlString = "\(base)\(service)?\(method)&api_key=\(key)&accuracy=\(location.accuracy)&lat=\(location.latitude)&lon=\(location.longitude)&per_page=1&page=1&format=json&nojsoncallback=1"
     
     return URL(string: urlString)
   }

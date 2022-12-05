@@ -7,28 +7,18 @@
 
 import Foundation
 
-actor ImageDataCache {
-  private let cache = NSCache<NSLocation, NSData>()
+class ImageDataCache {
+  private let cache = NSCache<NSString, NSData>()
   
-  func getItem(forKey key: Location) -> Data? {
-    guard let nsdata = cache.object(forKey: NSLocation(location: key)) else { return nil }
+  func getItem(forKey key: String) -> Data? {
+    let nskey = key as NSString
+    guard let nsdata = cache.object(forKey: nskey) else { return nil }
     return Data(referencing: nsdata)
   }
 
-  func setItem(forKey key: Location, item: Data) {
+  func setItem(forKey key: String, item: Data) {
     let nsitem = item as NSData
-    let nskey = NSLocation(location: key)
+    let nskey = key as NSString
     cache.setObject(nsitem, forKey: nskey)
-  }
-}
-
-private class NSLocation: NSObject {
-  let latitude: NSNumber
-  let longitude: NSNumber
-  
-  init(location: Location) {
-    self.latitude = location.latitude as NSNumber
-    self.longitude = location.longitude as NSNumber
-    super.init()
   }
 }
