@@ -63,18 +63,18 @@ class ImagesLocationsViewModel: ObservableObject {
 
 private extension ImagesLocationsViewModel {
   func start() {
-    locationCancellable = locationProvider.publisher
-      .sink{ [weak self] in
-        self?.handleLocationProviderStatus($0)
-      }
+    if locationCancellable == nil {
+      locationCancellable = locationProvider.publisher
+        .sink{ [weak self] in
+          self?.handleLocationProviderStatus($0)
+        }
+    }
     
     locationProvider.start()
   }
   
   func stop() {
     locationProvider.stop()
-    locationCancellable?.cancel()
-    locationCancellable = nil
   }
   
   func handleLocationProviderStatus(_ status: LocationProviderStatus) {
@@ -97,11 +97,23 @@ private extension ImagesLocationsViewModel {
     Task { @MainActor [weak self] in
       do {
         let imageUrl = try await imageFetcher.fetchImageUrl(atLocation: location)
+        guard state.isActive else { return }
         self?.state = .image(imageUrl)
       } catch {
         print("Failed to fetch image url by location: \(location) error: \(error)")
         self?.state = .failed(.imageFetchError(error))
       }
+    }
+  }
+}
+
+private extension ImagesLocationsViewModel.State {
+  var isActive: Bool {
+    switch self {
+    case .started, .image:
+      return true
+    case .stopped, .noPermission, .failed:
+      return false
     }
   }
 }

@@ -17,10 +17,18 @@ class ImageLocationTableViewCell: UITableViewCell {
     return image
   }()
   
+  private lazy var loadingView: UIActivityIndicatorView = {
+    let loadingView = UIActivityIndicatorView()
+    loadingView.style = .medium
+    loadingView.color = .black
+    return loadingView
+  }()
+  
   private var imageFetcherCancellable: AnyCancellable?
   private var imageLocationViewModel: ImageLocationViewModel?
   
   func updateCell(withViewModel viewModel: ImageLocationViewModel) {
+    loadingView.startAnimating()
     imageLocationViewModel = viewModel
     imageFetcherCancellable = imageLocationViewModel?.$imageData
       .sink { [weak self] imageData in
@@ -43,6 +51,8 @@ class ImageLocationTableViewCell: UITableViewCell {
   
   override func prepareForReuse() {
     super.prepareForReuse()
+    loadingView.isHidden = false
+    loadingView.stopAnimating()
     locationImage.image = nil
     imageFetcherCancellable?.cancel()
     imageFetcherCancellable = nil
@@ -53,6 +63,8 @@ class ImageLocationTableViewCell: UITableViewCell {
 private extension ImageLocationTableViewCell {
   func populate(_ imageData: Data) {
     locationImage.image = UIImage(data: imageData)
+    loadingView.stopAnimating()
+    loadingView.isHidden = true
   }
   
   func setupView() {
@@ -66,5 +78,10 @@ private extension ImageLocationTableViewCell {
     locationImage.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
     locationImage.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.95).isActive = true
     locationImage.heightAnchor.constraint(equalToConstant: 200).isActive = true
+    
+    contentView.addSubview(loadingView)
+    loadingView.translatesAutoresizingMaskIntoConstraints = false
+    loadingView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+    loadingView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
   }
 }

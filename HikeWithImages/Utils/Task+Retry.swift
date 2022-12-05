@@ -21,7 +21,7 @@ extension Task where Failure == Error {
         do {
           return try await operation()
         } catch {
-          print("Task failed! retry count: \(retry)")
+          print("Task failed! retries left: \(maxRetryCount - retry - 1)")
           let oneSecond = TimeInterval(1_000_000_000)
           let delay = UInt64(oneSecond * retryDelay)
           try await Task<Never, Never>.sleep(nanoseconds: delay)
