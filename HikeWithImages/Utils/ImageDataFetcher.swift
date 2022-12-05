@@ -14,7 +14,6 @@ enum ImageDataFetcherError: Error {
 }
 
 protocol ImageFetcher {
-  var cache: ImageDataCache { get }
   func fetchImageUrl(atLocation location: Location) async throws -> URL
   func fetchImageData(atUrl url: URL) async throws -> Data
 }
@@ -24,7 +23,6 @@ class FlickerImageFetcher: ImageFetcher {
   private let base = "https://www.flickr.com/"
   private let service = "services/rest/"
   private let method = "method=flickr.photos.search"
-  let cache = ImageDataCache()
   
   func fetchImageUrl(atLocation location: Location) async throws -> URL {
     guard let url = makeFlickrUrl(withLocation: location) else {

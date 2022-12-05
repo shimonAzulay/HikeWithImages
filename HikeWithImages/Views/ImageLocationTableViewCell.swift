@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class ImageLocationTableViewCell: UITableViewCell {
   static let identifier = "ImageLocationTableViewCell"
@@ -16,30 +17,18 @@ class ImageLocationTableViewCell: UITableViewCell {
     return image
   }()
   
-  private var imageFetcher: ImageFetcher?
-  private var imageData: Data? {
-    didSet {
-      populate()
-    }
-  }
+  private var imageFetcherCancellable: AnyCancellable?
+  private var imageLocationViewModel: ImageLocationViewModel?
   
-  func updateCell(WithImageUrl url: URL, imageFetcher: ImageFetcher) {
-    self.imageFetcher = imageFetcher
-    guard let imageData = imageFetcher.cache.getItem(forKey: url.absoluteString) else {
-      Task { @MainActor [weak self] in
-        do {
-          guard let imageData = try await self?.imageFetcher?.fetchImageData(atUrl: url) else { return }
-          self?.imageFetcher?.cache.setItem(forKey: url.absoluteString, item: imageData)
-          self?.imageData = imageData
-        } catch {
-          print(error)
-        }
+  func updateCell(viewModel: ImageLocationViewModel) {
+    imageLocationViewModel = viewModel
+    imageFetcherCancellable = imageLocationViewModel?.$imageData
+      .sink { [weak self] imageData in
+        guard let imageData else { return }
+        self?.populate(imageData)
       }
-      
-      return
-    }
     
-    self.imageData = imageData
+    imageLocationViewModel?.fetchImage()
   }
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -55,13 +44,13 @@ class ImageLocationTableViewCell: UITableViewCell {
   override func prepareForReuse() {
     super.prepareForReuse()
     locationImage.image = nil
-    imageData = nil
+    imageFetcherCancellable?.cancel()
+    imageFetcherCancellable = nil
   }
 }
 
 private extension ImageLocationTableViewCell {
-  func populate() {
-    guard let imageData = imageData else { return }
+  func populate(_ imageData: Data) {
     locationImage.image = UIImage(data: imageData)
   }
   

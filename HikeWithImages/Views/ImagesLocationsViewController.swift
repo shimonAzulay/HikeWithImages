@@ -75,7 +75,7 @@ class ImagesLocationsViewController: UIViewController {
                           message: state.alertMessage)
         }
       }
-        
+    
     setupView()
     setupTableView()
     setupLabel()
@@ -95,9 +95,9 @@ class ImagesLocationsViewController: UIViewController {
 private extension ImagesLocationsViewController {
   func setupView() {
     navigationItem.rightBarButtonItem  = startStopHikeButton
-    #if DEBUG
+#if DEBUG
     navigationItem.leftBarButtonItem = debugButton
-    #endif
+#endif
     view.backgroundColor = .white
   }
   
@@ -141,8 +141,10 @@ extension ImagesLocationsViewController: UITableViewDataSource {
                                                                        for: indexPath) as? ImageLocationTableViewCell {
       locationImageCell = reusedLocationImageCellCell
     }
-
-    locationImageCell.updateCell(WithImageUrl: imageUrl, imageFetcher: viewModel.imageFetcher)
+    
+    locationImageCell.updateCell(viewModel: ImageLocationViewModel(imageFetcher: viewModel.imageFetcher,
+                                                                   imageDataCache: viewModel.imageDataCache,
+                                                                   imageUrl: imageUrl))
     return locationImageCell
   }
 }

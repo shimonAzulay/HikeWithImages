@@ -39,6 +39,7 @@ class ImagesLocationsViewModel: ObservableObject {
     }
   }
   
+  let imageDataCache = ImageDataCache()
   let imageFetcher: ImageFetcher
   let locationProvider: LocationProvider
   

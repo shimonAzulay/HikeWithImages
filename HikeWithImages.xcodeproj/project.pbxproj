@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9F0187B0293E32F4002BF903 /* ImageLocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0187AF293E32F4002BF903 /* ImageLocationViewModel.swift */; };
 		9FA3113F293B443300B77DFB /* ImageLocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA3113E293B443300B77DFB /* ImageLocationTableViewCell.swift */; };
 		9FA31143293B468200B77DFB /* ImagesLocationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA31142293B468200B77DFB /* ImagesLocationsViewModel.swift */; };
 		9FA31147293B471A00B77DFB /* ImageDataCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA31146293B471A00B77DFB /* ImageDataCache.swift */; };
@@ -43,6 +44,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9F0187AF293E32F4002BF903 /* ImageLocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLocationViewModel.swift; sourceTree = "<group>"; };
 		9FA3113E293B443300B77DFB /* ImageLocationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLocationTableViewCell.swift; sourceTree = "<group>"; };
 		9FA31142293B468200B77DFB /* ImagesLocationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesLocationsViewModel.swift; sourceTree = "<group>"; };
 		9FA31146293B471A00B77DFB /* ImageDataCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDataCache.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				9FA31142293B468200B77DFB /* ImagesLocationsViewModel.swift */,
+				9F0187AF293E32F4002BF903 /* ImageLocationViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -317,6 +320,7 @@
 				9FA3113F293B443300B77DFB /* ImageLocationTableViewCell.swift in Sources */,
 				9FEF29A3293D360700FF5872 /* DebugViewController.swift in Sources */,
 				9FBCC6A2293B422000188856 /* ImagesLocationsViewController.swift in Sources */,
+				9F0187B0293E32F4002BF903 /* ImageLocationViewModel.swift in Sources */,
 				9FBCC69E293B422000188856 /* AppDelegate.swift in Sources */,
 				9FBCC6A0293B422000188856 /* SceneDelegate.swift in Sources */,
 				9FA3114F293B48B400B77DFB /* LocationProvider.swift in Sources */,
