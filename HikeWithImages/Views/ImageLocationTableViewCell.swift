@@ -71,6 +71,7 @@ private extension ImageLocationTableViewCell {
     backgroundColor = .clear
     contentView.backgroundColor = .clear
     selectionStyle = .none
+    
     contentView.addSubview(locationImage)
     locationImage.translatesAutoresizingMaskIntoConstraints = false
     locationImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
