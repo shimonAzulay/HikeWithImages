@@ -500,7 +500,7 @@
 				DEVELOPMENT_TEAM = E6KB8WYCTF;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HikeWithImages/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Hike With Images";
+				INFOPLIST_KEY_CFBundleDisplayName = Locations;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "The app finds images based on your location";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "The app finds images based on your location";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -530,7 +530,7 @@
 				DEVELOPMENT_TEAM = E6KB8WYCTF;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HikeWithImages/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Hike With Images";
+				INFOPLIST_KEY_CFBundleDisplayName = Locations;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "The app finds images based on your location";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "The app finds images based on your location";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
